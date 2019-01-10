@@ -1,0 +1,9 @@
+eldersafe_clean\gaussian.o: ..\Src\Gaussian.c
+eldersafe_clean\gaussian.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+eldersafe_clean\gaussian.o: ../Inc/rt_nonfinite.h
+eldersafe_clean\gaussian.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+eldersafe_clean\gaussian.o: ../Inc/rtwtypes.h
+eldersafe_clean\gaussian.o: ../Inc/predict_fall.h
+eldersafe_clean\gaussian.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+eldersafe_clean\gaussian.o: ../Inc/predict_fall_types.h
+eldersafe_clean\gaussian.o: ../Inc/Gaussian.h

@@ -1,0 +1,13 @@
+eldersafe_clean\compactclassificationecoc.o: ..\Src\CompactClassificationECOC.c
+eldersafe_clean\compactclassificationecoc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+eldersafe_clean\compactclassificationecoc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+eldersafe_clean\compactclassificationecoc.o: ../Inc/rt_nonfinite.h
+eldersafe_clean\compactclassificationecoc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+eldersafe_clean\compactclassificationecoc.o: ../Inc/rtwtypes.h
+eldersafe_clean\compactclassificationecoc.o: ../Inc/predict_fall.h
+eldersafe_clean\compactclassificationecoc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+eldersafe_clean\compactclassificationecoc.o: ../Inc/predict_fall_types.h
+eldersafe_clean\compactclassificationecoc.o: ../Inc/CompactClassificationECOC.h
+eldersafe_clean\compactclassificationecoc.o: ../Inc/repmat.h
+eldersafe_clean\compactclassificationecoc.o: ../Inc/CompactSVM.h
+eldersafe_clean\compactclassificationecoc.o: ../Inc/CompactClassificationModel.h

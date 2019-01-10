@@ -1,0 +1,12 @@
+eldersafe_clean\compactsvm.o: ..\Src\CompactSVM.c
+eldersafe_clean\compactsvm.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+eldersafe_clean\compactsvm.o: ../Inc/rt_nonfinite.h
+eldersafe_clean\compactsvm.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+eldersafe_clean\compactsvm.o: ../Inc/rtwtypes.h
+eldersafe_clean\compactsvm.o: ../Inc/predict_fall.h
+eldersafe_clean\compactsvm.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+eldersafe_clean\compactsvm.o: ../Inc/predict_fall_types.h
+eldersafe_clean\compactsvm.o: ../Inc/CompactSVM.h
+eldersafe_clean\compactsvm.o: ../Inc/Gaussian.h
+eldersafe_clean\compactsvm.o: ../Inc/dot.h
+eldersafe_clean\compactsvm.o: ../Inc/bsxfun.h
