@@ -75,7 +75,139 @@
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
+int ecgarr[HR_SAMPLES] = 
+{543,
+524,
+481,
+481,
+497,
+496,
+522,
+498,
+537,
+352,
+540,
+532,
+549,
+582,
+551,
+500,
+503,
+506,
+507,
+509,
+490,
+514,
+356,
+511,
+516,
+537,
+567,
+529,
+466,
+467,
+470,
+474,
+469,
+453,
+454,
+373,
+483,
+491,
+516,
+537,
+483,
+450,
+454,
+458,
+462,
+449,
+458,
+477,
+453,
+494,
+510,
+539,
+540,
+486,
+474,
+480,
+482,
+497,
+478,
+500,
+351,
+533,
+525,
+543,
+576,
+551,
+502,
+497,
+514,
+520,
+523,
+510,
+522,
+420,
+550,
+564,
+596,
+632,
+577,
+538,
+545,
+543,
+547,
+538,
+540,
+565,
+535,
+576,
+595,
+631,
+626,
+570,
+556,
+561,
+563,
+575,
+546,
+577,
+416,
+583,
+581,
+601,
+625,
+584,
+539,
+539,
+539,
+540,
+520,
+525,
+526,
+534,
+542,
+563,
+587,
+581,
+520,
+501,
+501,
+501,
+505,
+474,
+501,
+361,
+509,
+511,
+530,
+552
 
+};
+
+int ecgarrindex = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -142,10 +274,10 @@ int main(void)
   MX_USART6_UART_Init();
   MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
-	BT_Init();
-	TEMP_Init();
+	//BT_Init();
+	//TEMP_Init();
 	HR_Init();
-	accel_Config();
+	//accel_Config();
 	
 	init_tasks();
 	
@@ -261,7 +393,10 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 	BaseType_t xHigherPriorityTaskWoken;
 	xHigherPriorityTaskWoken = pdFALSE;
 	// Read data from ADC
-	hrRaw = HAL_ADC_GetValue(hadc);
+	//hrRaw = HAL_ADC_GetValue(hadc);
+	if(ecgarrindex == HR_SAMPLES) 
+		ecgarrindex = 0;
+	hrRaw = ecgarr[ecgarrindex++];
 	// Send data to heart rate queue
 	xQueueSendToBackFromISR(xQueueHRRaw, &hrRaw, &xHigherPriorityTaskWoken);
 	// Wake up next task

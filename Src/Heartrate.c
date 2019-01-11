@@ -7,7 +7,7 @@
 #define ARM_MATH_CM7
 #include "arm_math.h"
 
-static float	lastBPM;
+static float lastBPM;
 static char tachyCount;
 static char bradyCount;
 
@@ -85,18 +85,18 @@ _Bool searchBeat()
 		arm_min_f32((float32_t*)ecgOutput + peakSearcher, BLOCK_SIZE, (float32_t*)&hrValue, &hrValueIndex);
 		absoluteIndex = hrValueIndex + peakSearcher;
 		// Check if min is on beat part of wave
-		if(hrValue < FIR_THRESHOLD)
+		if(hrValue < FIR_THRESHOLD && !muscleNoise(absoluteIndex))
 		{
 			// If it is, store the index
 			hrPeak[peakCounter++] = absoluteIndex;
 		}
 	}
-	return (ignoreOutliers() && !muscleNoise());
+	return (ignoreOutliers());
 }
 
-_Bool muscleNoise()
+_Bool muscleNoise(int nextIndex)
 {
-	if(hrPeak[0] + BEAT_OFFSET > hrPeak[1])
+	if(hrPeak[0] + BEAT_OFFSET > nextIndex)
 		return true;
 	return false;
 }
@@ -127,9 +127,9 @@ void resetHeartCount()
 	tachyCount = 0;
 	bradyCount = 0;
 }
-_Bool checkHeartRateIssue(int lastBPM)
+_Bool checkHeartRateIssue(int lastHR)
 {
-	if(lastBPM > HRMAX){
+	if(lastHR > HRMAX){
 		tachyCount += 1;
 		if(tachyCount == MAX_H)
 			return true;
@@ -137,7 +137,7 @@ _Bool checkHeartRateIssue(int lastBPM)
 	}
 	else
 	{
-		if(lastBPM < HRMIN)
+		if(lastHR < HRMIN)
 		{
 			bradyCount += 1;
 			if(bradyCount == MAX_H)
