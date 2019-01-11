@@ -85,18 +85,18 @@ _Bool searchBeat()
 		arm_min_f32((float32_t*)ecgOutput + peakSearcher, BLOCK_SIZE, (float32_t*)&hrValue, &hrValueIndex);
 		absoluteIndex = hrValueIndex + peakSearcher;
 		// Check if min is on beat part of wave
-		if(hrValue < FIR_THRESHOLD	&& !muscleNoise(absoluteIndex))
+		if(hrValue < FIR_THRESHOLD)
 		{
 			// If it is, store the index
 			hrPeak[peakCounter++] = absoluteIndex;
 		}
 	}
-	return ignoreOutliers();
+	return (ignoreOutliers() && !muscleNoise());
 }
 
-_Bool muscleNoise(int nextIndex)
+_Bool muscleNoise()
 {
-	if(hrPeak[0] + BEAT_OFFSET > nextIndex)
+	if(hrPeak[0] + BEAT_OFFSET > hrPeak[1])
 		return true;
 	return false;
 }

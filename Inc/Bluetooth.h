@@ -36,9 +36,5 @@ void Rx_Bt_Handler(void);
 // Support functions
 void parseCommand(char*);
 void executeCommand(void);
-_Bool updatedClock(void);
-
-
-
 
 #endif

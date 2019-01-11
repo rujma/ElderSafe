@@ -24,7 +24,7 @@ void HR_Init(void);
 _Bool checkHeartRateIssue(int lastBPM);
 void resetHeartCount(void);
 void firFilter(void);
-_Bool muscleNoise(int);
+_Bool muscleNoise(void);
 _Bool storeECGData(int);
 
 

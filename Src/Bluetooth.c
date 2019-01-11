@@ -8,8 +8,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-// RTC Flag
-static _Bool clock;
 static uint8_t ch = 0;
 
 static t_cmd_struct cmd_table[] = {
@@ -23,7 +21,6 @@ static t_str_array str_arr;
 void BT_Init()
 {
 	HAL_UART_Receive_IT(&huart6, &ch, 1);
-	clock = FALSE;
 }
 
 void Rx_Bt_Handler()
@@ -80,7 +77,7 @@ void updateTime()
 	HAL_RTC_SetTime(&hrtc, sTIME, RTC_FORMAT_BIN);
 	// send feedback message
 	HAL_UART_Transmit_DMA(&huart6, (uint8_t*)"OK", 2);
-	//clock = TRUE;
+	// start store task
 	HAL_TIM_Base_Start_IT(&htim2);
 }
 
@@ -111,7 +108,3 @@ void logRequest()
 	xSemaphoreGive(xSemaphoreSendBT);
 }
 
-_Bool updatedClock()
-{
-	return clock;
-}

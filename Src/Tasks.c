@@ -357,28 +357,26 @@ void vTaskStore()
 	
 	for(;;)
 	{
-		//if(updatedClock() == TRUE){
-			// Trigger storage task
-			xSemaphoreTake(xSemaphoreStore, portMAX_DELAY);
-			// Get current time
-			HAL_RTC_GetTime(&hrtc, sTIME, RTC_FORMAT_BIN);
-			tStore.hour = sTIME->Hours;
-			tStore.minute = sTIME->Minutes;
-			sTIME->Hours+=1;
-			HAL_RTC_SetTime(&hrtc, sTIME, RTC_FORMAT_BIN);
-			// Get last temperature value
-			xSemaphoreTake(xMutexTempStore, portMAX_DELAY);
-			tStore.temp = getLastTemperature();
-			xSemaphoreGive(xMutexTempStore);
-			// Get last heart rate value
-			xSemaphoreTake(xMutexHRStore, portMAX_DELAY);
-			tStore.BPM = getLastHeartRate();
-			xSemaphoreGive(xMutexHRStore);
-			// Write on log buffer
-			sprintf(messageToLog,"%d:%d %d %.1f \n", tStore.hour, tStore.minute, tStore.BPM, tStore.temp);
-			xSemaphoreTake(xMutexSendBT, portMAX_DELAY);
-			strcat(logData, messageToLog);
-			xSemaphoreGive(xMutexSendBT);
-		//}
+		// Trigger storage task
+		xSemaphoreTake(xSemaphoreStore, portMAX_DELAY);
+		// Get current time
+		HAL_RTC_GetTime(&hrtc, sTIME, RTC_FORMAT_BIN);
+		tStore.hour = sTIME->Hours;
+		tStore.minute = sTIME->Minutes;
+		sTIME->Hours+=1;
+		HAL_RTC_SetTime(&hrtc, sTIME, RTC_FORMAT_BIN);
+		// Get last temperature value
+		xSemaphoreTake(xMutexTempStore, portMAX_DELAY);
+		tStore.temp = getLastTemperature();
+		xSemaphoreGive(xMutexTempStore);
+		// Get last heart rate value
+		xSemaphoreTake(xMutexHRStore, portMAX_DELAY);
+		tStore.BPM = getLastHeartRate();
+		xSemaphoreGive(xMutexHRStore);
+		// Write on log buffer
+		sprintf(messageToLog,"%d:%d %d %.1f \n", tStore.hour, tStore.minute, tStore.BPM, tStore.temp);
+		xSemaphoreTake(xMutexSendBT, portMAX_DELAY);
+		strcat(logData, messageToLog);
+		xSemaphoreGive(xMutexSendBT);
 	}
 }

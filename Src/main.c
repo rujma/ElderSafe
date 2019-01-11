@@ -146,8 +146,6 @@ int main(void)
 	TEMP_Init();
 	HR_Init();
 	accel_Config();
-	// Start storage timer
-	//HAL_TIM_Base_Start_IT(&htim2);
 	
 	init_tasks();
 	
