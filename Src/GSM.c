@@ -6,6 +6,9 @@
 #define FALSE 0
 #define TRUE 1
 
+/* Contact information */
+Contact_Typedef emergency_contact;
+
 static GSM_t gsm;
 
 void GSM_Init(void)
@@ -14,7 +17,9 @@ void GSM_Init(void)
 }
 void GSM_Config(void)
 {
+	// Send wake up AT command
 	GSM_send_message_check_answer("AT\r\n","AT\r\r\nOK\r\n");
+	// Configure module for SMS mode
 	GSM_send_message_check_answer("AT+CMGF = 1\r\n","AT+CMGF = 1\r\r\nOK\r\n");
 }
 

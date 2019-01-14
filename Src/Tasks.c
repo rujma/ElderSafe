@@ -59,6 +59,7 @@ struct Storage{
 /* Data to be sent to bluetooth app */
 char logData[4000];
 
+
 void init_queue_set()
 {
 	// Init queue set
@@ -155,8 +156,6 @@ void vTaskAcquireAccel()
 
 void vTaskDistress()
 {
-	/* Contact*/
-	Contact_Typedef emergency_contact;
 	/* Start and configure GSM module */
 	GSM_Config();
 	/* Read contact saved on SIM card */

@@ -52,7 +52,7 @@
 "eldersafe_clean\tasks_1.o"
 "eldersafe_clean\timers.o"
 "eldersafe_clean\cmsis_os.o"
-"C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Lib\ARM\arm_cortexM7lfdp_math.lib"
+"C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Lib\ARM\arm_cortexM7lfdp_math.lib"
 --library_type=microlib --strict --scatter "eldersafe_clean\eldersafe_clean.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

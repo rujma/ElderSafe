@@ -93,14 +93,15 @@ void changeEmergencyContact()
 		strcat(contact.m_number, str_arr.stringArray[CONTACT]);
 		// take mutex
 		xSemaphoreTake(xMutexEC, portMAX_DELAY);
-		// update emergency contact function
-		addContact(contact, 5);
+		// Update global variable
+		emergency_contact = contact;
 		// give mutex
 		xSemaphoreGive(xMutexEC);
+		// update emergency contact function
+		addContact(contact, 5);
 	}
 	else 
 		HAL_UART_Transmit_DMA(&huart6, (uint8_t*)"NO", 2);
-	
 }
 
 void logRequest()
