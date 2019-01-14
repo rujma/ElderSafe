@@ -40,6 +40,7 @@ void HR_Init()
 	peakCounter = 0;
 	hrPeak[0] = 0;
 	hrPeak[1] = 0;
+	resetHeartCount();
 	// Initialize filter
 	blockSize = FIR_BLOCK_SIZE;
 	numBlocks = HR_SAMPLES / FIR_BLOCK_SIZE;

@@ -101,17 +101,17 @@ void init_semaphores()
 
 void init_tasks()
 {
-	//xTaskCreate((TaskFunction_t)vTaskProcessBT, "BT", 1024, NULL, 1, NULL);
-	//xTaskCreate((TaskFunction_t)vTaskSendBT, "SBT", 1024, NULL, 1, NULL);
+	xTaskCreate((TaskFunction_t)vTaskProcessBT, "BT", 1024, NULL, 1, NULL);
+	xTaskCreate((TaskFunction_t)vTaskSendBT, "SBT", 1024, NULL, 1, NULL);
 	xTaskCreate((TaskFunction_t)vTaskProcessHeartRate, "HR", 2048, NULL, 2, NULL);
-	//xTaskCreate((TaskFunction_t)vTaskAcquireTemp, "ATEMP", 1024, NULL, 3, NULL);
-	//xTaskCreate((TaskFunction_t)vTaskProcessTemp, "PTEMP", 1024, NULL, 2, NULL);
-	//xTaskCreate((TaskFunction_t)vTaskStore, "STORE", 1024, NULL, 1, NULL);
-	//xTaskCreate((TaskFunction_t)vTaskAnalyze, "AN", 1024, NULL, 2, NULL);
-	//xTaskCreate((TaskFunction_t)vTaskProcessAccel, "ProcessAccel", 15000, NULL, 2, NULL);
-	//xTaskCreate((TaskFunction_t)vTaskAcquireAccel, "AcquireAccel", 1024, NULL, 3, NULL);
-	//xTaskCreate((TaskFunction_t)vTaskSoundAlert, "SoundAlert", 1024, NULL, 3, NULL);
-	//xTaskCreate((TaskFunction_t)vTaskDistress, "Distress", 1024, NULL, 3, NULL);
+	xTaskCreate((TaskFunction_t)vTaskAcquireTemp, "ATEMP", 1024, NULL, 3, NULL);
+	xTaskCreate((TaskFunction_t)vTaskProcessTemp, "PTEMP", 1024, NULL, 2, NULL);
+	xTaskCreate((TaskFunction_t)vTaskStore, "STORE", 1024, NULL, 1, NULL);
+	xTaskCreate((TaskFunction_t)vTaskAnalyze, "AN", 15000, NULL, 2, NULL);
+	xTaskCreate((TaskFunction_t)vTaskProcessAccel, "ProcessAccel", 2048, NULL, 2, NULL);
+	xTaskCreate((TaskFunction_t)vTaskAcquireAccel, "AcquireAccel", 1024, NULL, 3, NULL);
+	xTaskCreate((TaskFunction_t)vTaskSoundAlert, "SoundAlert", 1024, NULL, 3, NULL);
+	xTaskCreate((TaskFunction_t)vTaskDistress, "Distress", 1024, NULL, 3, NULL);
 }
 
 void vTaskProcessAccel()

@@ -274,10 +274,10 @@ int main(void)
   MX_USART6_UART_Init();
   MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
-	//BT_Init();
-	//TEMP_Init();
+	BT_Init();
+	TEMP_Init();
 	HR_Init();
-	//accel_Config();
+	accel_Config();
 	
 	init_tasks();
 	
