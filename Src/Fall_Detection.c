@@ -10,35 +10,28 @@
 
 #define MAX_BUFFER 120
 #define A_SVM_THRESHOLD 1.5
-#define PITCH_THRESHOLD 50
 #define TRUE 1
 #define FALSE 0
 #define FALL_SAMPLES 30
-typedef enum {FALL ,NO_FALL} Fall_Detection_Typedef;
+typedef enum {FALL,NO_FALL} Fall_Detection_Typedef;
 
-static tAccelParameters samples_buffer[MAX_BUFFER];
-static unsigned char samples_buffer_index;
 
-static char accelIndex;
-
-double forceArray[30];
-double pitchArray[30];
-double prediction[30];
+static uint8_t predictions[FALL_SAMPLES];
+static char predictions_index;
 static char falls = 0;
 static char walk = 0;
 static char jump = 0;
 static char ld = 0;
 
-int checkFallEvent()
+Fall_Detection_Typedef checkFallEvent()
 {
 	int value;
-	char message[20];
-	HAL_UART_Transmit(&huart6,(uint8_t *)"start\r\n",strlen("start\r\n"),100);
+	Fall_Detection_Typedef fall_flag = NO_FALL;
+	// Iterate through the predictions array
 	for(int i = 0; i < FALL_SAMPLES; i++)
 	{
-		value = predict_fall(forceArray[i], pitchArray[i]);
-		sprintf(message,"%d",value);
-		HAL_UART_Transmit(&huart6,(uint8_t *)message,strlen(message),100);
+		value = predictions[i];
+		// Count the number of occurrences of each class
 		switch(value)
 		{
 			case 0:
@@ -55,20 +48,19 @@ int checkFallEvent()
 				break;
 		}
 	}
-	HAL_UART_Transmit(&huart6,(uint8_t *)"\r\nend\r\n",strlen("\r\nend\r\n"),100);
-	if(falls > walk && falls > jump && falls > ld) 
-	{
-		falls = 0;
-		walk = 0;
-		jump = 0;
-		ld = 0;
-		return 1;
-	}
-		falls = 0;
-		walk = 0;
-		jump = 0;
-		ld = 0;
-	return 0;
+	// If the FALL class has the most occurrences, it's a fall
+	if(falls > walk && falls > jump && falls > ld)  
+		fall_flag = FALL;
+	else 
+		fall_flag = NO_FALL;
+	
+	//Reset prediction counters
+	falls = 0;
+	walk = 0;
+	jump = 0;
+	ld = 0;
+	// Return fall status													
+	return fall_flag;
 }
 
 Fall_Detection_Typedef fall_detection(tAccelParameters param)
@@ -76,28 +68,30 @@ Fall_Detection_Typedef fall_detection(tAccelParameters param)
 	static _Bool fall_started;
 	if(!fall_started)
 	{
+		// Resulting force is above threshold
 		if(param.A_svm > A_SVM_THRESHOLD)
 		{
+			// Signal the start of a fall
 			fall_started = TRUE;
 		}
 	}
 	else
 	{
-		forceArray[accelIndex] = param.A_svm;
-		pitchArray[accelIndex] = param.Theta;
-		accelIndex++;
-		if(accelIndex == FALL_SAMPLES)
+		// Fall is occuring: predict the class of next resulting force and pitch
+		predictions[predictions_index] = predict_fall(param.A_svm, param.Theta);
+		predictions_index++;
+		// Buffer is full, ready to count the occurrences
+		if(predictions_index == FALL_SAMPLES)
 		{
-			accelIndex = 0;
+			predictions_index = 0;
 			fall_started = FALSE;
-			if(checkFallEvent() == 1) 
+			if(checkFallEvent() == FALL) 
 			{
 				return FALL;
 			}
 		}
-		return NO_FALL;
 	}
-		return NO_FALL;
+	return NO_FALL;
 }
 
 
