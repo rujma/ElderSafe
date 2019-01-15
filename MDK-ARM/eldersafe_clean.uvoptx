@@ -152,9 +152,73 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>397</LineNumber>
+          <LineNumber>168</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134221748</Address>
+          <Address>134261020</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>..\Src\Tasks.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\eldersafe_clean\../Src/Tasks.c\168</Expression>
+        </Bp>
+        <Bp>
+          <Number>1</Number>
+          <Type>0</Type>
+          <LineNumber>247</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134260646</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>..\Src\Tasks.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\eldersafe_clean\../Src/Tasks.c\247</Expression>
+        </Bp>
+        <Bp>
+          <Number>2</Number>
+          <Type>0</Type>
+          <LineNumber>225</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134260544</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>..\Src\Tasks.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\eldersafe_clean\../Src/Tasks.c\225</Expression>
+        </Bp>
+        <Bp>
+          <Number>3</Number>
+          <Type>0</Type>
+          <LineNumber>236</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134260592</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>..\Src\Tasks.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\eldersafe_clean\../Src/Tasks.c\236</Expression>
+        </Bp>
+        <Bp>
+          <Number>4</Number>
+          <Type>0</Type>
+          <LineNumber>435</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134225518</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -163,7 +227,23 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>../Src/main.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\eldersafe_clean\../Src/main.c\397</Expression>
+          <Expression>\\eldersafe_clean\../Src/main.c\435</Expression>
+        </Bp>
+        <Bp>
+          <Number>5</Number>
+          <Type>0</Type>
+          <LineNumber>315</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134261670</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>..\Src\Tasks.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\eldersafe_clean\../Src/Tasks.c\315</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -212,7 +292,17 @@
         <Ww>
           <count>0</count>
           <WinNumber>2</WinNumber>
-          <ItemText>pred</ItemText>
+          <ItemText>BPM,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>1</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>newTemp</ItemText>
+        </Ww>
+        <Ww>
+          <count>2</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>logData</ItemText>
         </Ww>
       </WatchWindow2>
       <Tracepoint>

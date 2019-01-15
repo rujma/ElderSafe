@@ -3,16 +3,16 @@
 
 void startSoundAlert(void)
 {
-	HAL_TIM_PWM_Start(&htim11,TIM_CHANNEL_1);
+	__HAL_TIM_SET_COMPARE(&htim11,TIM_CHANNEL_1,3000);
 }
 
 void stopSoundAlert(void)
 {
-	HAL_TIM_PWM_Stop(&htim11,TIM_CHANNEL_1);
+	__HAL_TIM_SET_COMPARE(&htim11,TIM_CHANNEL_1,0);
 }
 
 void buzzer_Init(void)
 {
-	MX_TIM11_Init();
-	__HAL_TIM_SET_COMPARE(&htim11,TIM_CHANNEL_1,100);
+	HAL_TIM_PWM_Start(&htim11,TIM_CHANNEL_1);
+	
 }

@@ -156,9 +156,9 @@ void MX_TIM11_Init(void)
   TIM_OC_InitTypeDef sConfigOC;
 
   htim11.Instance = TIM11;
-  htim11.Init.Prescaler = 0;
+  htim11.Init.Prescaler = 1;
   htim11.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim11.Init.Period = 1349;
+  htim11.Init.Period = 53999;
   htim11.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim11.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_Base_Init(&htim11) != HAL_OK)

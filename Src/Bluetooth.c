@@ -73,12 +73,18 @@ void updateTime()
 	// Save received hour data
 	sTIME->Hours = atoi(str_arr.stringArray[HOUR]);
 	sTIME->Minutes = atoi(str_arr.stringArray[MINUTE]);
-	// set RTC to current time
-	HAL_RTC_SetTime(&hrtc, sTIME, RTC_FORMAT_BIN);
-	// send feedback message
-	HAL_UART_Transmit_DMA(&huart6, (uint8_t*)"OK", 2);
-	// start store task
-	HAL_TIM_Base_Start_IT(&htim2);
+	// Check received time
+	if(sTIME->Hours <= 23 && sTIME->Minutes <= 59)
+	{
+		// set RTC to current time
+		HAL_RTC_SetTime(&hrtc, sTIME, RTC_FORMAT_BIN);
+		// send feedback message
+		HAL_UART_Transmit_DMA(&huart6, (uint8_t*)"OK", 2);
+		// Start timer 2 interrupts
+		HAL_TIM_Base_Start_IT(&htim2);
+	} else 
+	// Error
+	HAL_UART_Transmit_DMA(&huart6, (uint8_t*)"NO", 2);
 }
 
 void changeEmergencyContact()

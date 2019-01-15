@@ -86,6 +86,7 @@ void init_mutexes()
 	xMutexTempStore = xSemaphoreCreateMutex();
 	xMutexHRStore = xSemaphoreCreateMutex();
 	xMutexSendBT = xSemaphoreCreateMutex();
+	xMutexEC = xSemaphoreCreateMutex();
 }
 
 void init_semaphores()
@@ -123,7 +124,7 @@ void vTaskProcessAccel()
 	for(;;)
 	{	
 		/* read raw data from xQueueAccelRaw */
-		xQueueReceive(xQueueAccelRaw,&accel_raw_data,portMAX_DELAY);
+		xQueueReceive(xQueueAccelRaw,&accel_raw_data, portMAX_DELAY);
 		/* convert raw data to g force*/
 		accel = convertToGForce(accel_raw_data);
 		/*low pass filter data*/
@@ -137,7 +138,6 @@ void vTaskProcessAccel()
 
 void vTaskAcquireAccel()
 {
-	uint8_t index;
 	uint8_t accel_raw_data[6];
 	for(;;)
 	{
@@ -157,9 +157,9 @@ void vTaskAcquireAccel()
 void vTaskDistress()
 {
 	/* Start and configure GSM module */
-	GSM_Config();
+	//GSM_Config();
 	/* Read contact saved on SIM card */
-	readContact(&emergency_contact, 5);
+	//readContact(&emergency_contact, 5);
 	for(;;)
 	{
 		/*wait for distress event*/
@@ -169,7 +169,7 @@ void vTaskDistress()
 		/*take mutex to read emergency contact*/
 		xSemaphoreTake(xMutexEC,portMAX_DELAY);
 		/*send sms distress message*/
-		sendSMS(&emergency_contact, "HELP");
+		//sendSMS(&emergency_contact, "HELP");
 		/*realease mutex*/
 		xSemaphoreGive(xMutexEC);
 	}

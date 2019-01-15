@@ -278,6 +278,7 @@ int main(void)
 	TEMP_Init();
 	HR_Init();
 	accel_Config();
+	buzzer_Init();
 	
 	init_tasks();
 	
