@@ -157,9 +157,9 @@ void vTaskAcquireAccel()
 void vTaskDistress()
 {
 	/* Start and configure GSM module */
-	//GSM_Config();
+	GSM_Config();
 	/* Read contact saved on SIM card */
-	//readContact(&emergency_contact, 5);
+	readContact(&emergency_contact, 5);
 	for(;;)
 	{
 		/*wait for distress event*/
