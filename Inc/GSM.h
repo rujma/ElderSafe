@@ -16,8 +16,6 @@ typedef struct
 	unsigned char busy;
 }GSM_t;
 
-/* Contact information */
-extern Contact_Typedef emergency_contact;
 
 void GSM_Config(void);
 _Bool addContact(Contact_Typedef contact, unsigned char pos);

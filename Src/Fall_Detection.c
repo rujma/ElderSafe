@@ -9,7 +9,7 @@
 #include "string.h"
 
 #define MAX_BUFFER 120
-#define A_SVM_THRESHOLD 1.5
+#define A_SVM_THRESHOLD 1.4
 #define TRUE 1
 #define FALSE 0
 #define FALL_SAMPLES 30

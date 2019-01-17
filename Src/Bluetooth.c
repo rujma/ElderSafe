@@ -94,7 +94,7 @@ void changeEmergencyContact()
 	phoneNumber = atoi(str_arr.stringArray[CONTACT]);
 	if(phoneNumber > 900000000 && phoneNumber < 999999999)
 	{
-		HAL_UART_Transmit_DMA(&huart6, (uint8_t*)"OK", 2);
+		
 		strcat(contact.m_number, "+351");
 		strcat(contact.m_number, str_arr.stringArray[CONTACT]);
 		// take mutex
@@ -104,7 +104,10 @@ void changeEmergencyContact()
 		// give mutex
 		xSemaphoreGive(xMutexEC);
 		// update emergency contact function
-		addContact(contact, 5);
+		if(addContact(contact, 5))
+			HAL_UART_Transmit_DMA(&huart6, (uint8_t*)"OK", 2);
+		else 
+			HAL_UART_Transmit_DMA(&huart6, (uint8_t*)"NO", 2);
 	}
 	else 
 		HAL_UART_Transmit_DMA(&huart6, (uint8_t*)"NO", 2);

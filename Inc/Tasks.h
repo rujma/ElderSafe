@@ -1,6 +1,7 @@
 #ifndef __TASKS_H_
 #define __TASKS_H_
 #include "cmsis_os.h"
+#include "GSM.h"
 
 #define SINGLE_VALUE 1
 
@@ -32,6 +33,9 @@ extern QueueHandle_t xQueueAccelProcessed;
 
 /*Queue Set*/
 extern QueueSetHandle_t xQueueSetAnalysis;
+
+/* Contact information */
+extern Contact_Typedef emergency_contact;
 
 /*Initialization functions*/
 void init_semaphores(void);
