@@ -68,8 +68,6 @@ tAccelParameters calculateParameters(tAccel accel)
 
 void accel_Config(void)
 {
-	uint8_t data[6];
-	uint8_t index = 0;
 	accel_Write(0x2D,0x00); // set power_ctl to 0x00 disabling the module
 	accel_Write(0x2D,0x08); // activate the module
 	accel_Write(0X31,0x0B); // set data format full resolution

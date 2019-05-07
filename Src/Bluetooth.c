@@ -31,15 +31,20 @@ void Rx_Bt_Handler()
 
 	switch(ch)
 	{
+		// Check for carriage return
 		case(CR):
+			// Send carriage return for parsin purpose
 			xQueueSendToBackFromISR(xQueueBT, &delimiter, &xHigherPriorityTaskWoken);
+		// Signal vTaskProcessBT task
 			xSemaphoreGiveFromISR( xSemaphoreBluetooth, &xHigherPriorityTaskWoken );
 			portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 			break;
 		default:
+			// Add new character to queue
 			xQueueSendToBackFromISR(xQueueBT, &ch, &xHigherPriorityTaskWoken);
 		break;
 	}
+	// Enable interrupts
 	HAL_UART_Receive_IT(&huart6, &ch, 1);	
 }
 
@@ -60,9 +65,12 @@ void parseCommand(char * queueData)
 void executeCommand()
 {
 	size_t index;
+	// Search for the received command in the command array
 	for(index = 0; index < NCOMMANDS; index++)
 	{
+		// Compare command identifier: LG, UT or EC
 		if(strcmp(cmd_table[index].command, str_arr.stringArray[COMMAND_INDEX]) == 0)
+			// Command found, execute the corresponding function
 			cmd_table[index].command_function();
 	}
 }
@@ -94,17 +102,23 @@ void changeEmergencyContact()
 	phoneNumber = atoi(str_arr.stringArray[CONTACT]);
 	if(phoneNumber > 900000000 && phoneNumber < 999999999)
 	{
-		HAL_UART_Transmit_DMA(&huart6, (uint8_t*)"OK", 2);
+		// Add the number indicative
 		strcat(contact.m_number, "+351");
+		// Concatenate the phone number with the indicative
 		strcat(contact.m_number, str_arr.stringArray[CONTACT]);
 		// take mutex
 		xSemaphoreTake(xMutexEC, portMAX_DELAY);
 		// Update global variable
 		emergency_contact = contact;
+		// update emergency contact function
+		if(addContact(contact, 5))
+			// Number was saved
+			HAL_UART_Transmit_DMA(&huart6, (uint8_t*)"OK", 2);
+		else 
+			// Number is invalud
+			HAL_UART_Transmit_DMA(&huart6, (uint8_t*)"NO", 2);
 		// give mutex
 		xSemaphoreGive(xMutexEC);
-		// update emergency contact function
-		addContact(contact, 5);
 	}
 	else 
 		HAL_UART_Transmit_DMA(&huart6, (uint8_t*)"NO", 2);
@@ -112,6 +126,7 @@ void changeEmergencyContact()
 
 void logRequest()
 {
+	// Signal the vTaskSendBT task
 	xSemaphoreGive(xSemaphoreSendBT);
 }
 

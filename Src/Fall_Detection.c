@@ -9,7 +9,7 @@
 #include "string.h"
 
 #define MAX_BUFFER 120
-#define A_SVM_THRESHOLD 1.5
+#define A_SVM_THRESHOLD 1.4
 #define TRUE 1
 #define FALSE 0
 #define FALL_SAMPLES 30
@@ -87,11 +87,9 @@ Fall_Detection_Typedef fall_detection(tAccelParameters param)
 			fall_started = FALSE;
 			if(checkFallEvent() == FALL) 
 			{
-				HAL_UART_Transmit_DMA(&huart6,(uint8_t *)"fall\r\n",strlen("fall\r\n"));
 				return FALL;
 				
 			}
-			else HAL_UART_Transmit_DMA(&huart6,(uint8_t *)"no\r\n",strlen("no\r\n"));
 		}
 	}
 	return NO_FALL;

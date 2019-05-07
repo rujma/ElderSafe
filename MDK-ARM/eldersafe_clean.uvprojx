@@ -477,11 +477,6 @@
               <FilePath>..\Src\Buzzer.c</FilePath>
             </File>
             <File>
-              <FileName>EmergencyContact.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Src\EmergencyContact.c</FilePath>
-            </File>
-            <File>
               <FileName>Fall_Detection.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Src\Fall_Detection.c</FilePath>

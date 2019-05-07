@@ -17,7 +17,6 @@
 "eldersafe_clean\accelerometer.o"
 "eldersafe_clean\button.o"
 "eldersafe_clean\buzzer.o"
-"eldersafe_clean\emergencycontact.o"
 "eldersafe_clean\fall_detection.o"
 "eldersafe_clean\gsm.o"
 "eldersafe_clean\predict_fall.o"

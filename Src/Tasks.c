@@ -59,11 +59,13 @@ struct Storage{
 /* Data to be sent to bluetooth app */
 char logData[4000];
 
+/* Contact information */
+Contact_Typedef emergency_contact;
 
 void init_queue_set()
 {
 	// Init queue set
-	xQueueSetAnalysis = xQueueCreateSet(1 * 3);
+	xQueueSetAnalysis = xQueueCreateSet(32);
 	// Add queues to set
 	xQueueAddToSet(xQueueTempProcessed, xQueueSetAnalysis);
 	xQueueAddToSet(xQueueHRProcessed, xQueueSetAnalysis);
@@ -132,7 +134,7 @@ void vTaskProcessAccel()
 		/*calculate accelerometer parameters */
 		accel_parameters = calculateParameters(accel);
 		/* send parameters to task Analyze*/
-		xQueueSend(xQueueAccelProcessed,(void*)&accel_parameters,( TickType_t ) 10);
+		xQueueSend(xQueueAccelProcessed,(void*)&accel_parameters,portMAX_DELAY);
 	}
 }
 
@@ -150,16 +152,13 @@ void vTaskAcquireAccel()
 		/*read data from DMA*/
 		accel_read_DMA(accel_raw_data);
 		/* send data to process data*/
-		xQueueSend(xQueueAccelRaw,(void*)(&accel_raw_data),( TickType_t ) 10);
+		xQueueSend(xQueueAccelRaw,(void*)(&accel_raw_data), portMAX_DELAY);
 	}
 }
 
 void vTaskDistress()
 {
-	/* Start and configure GSM module */
-	GSM_Config();
-	/* Read contact saved on SIM card */
-	readContact(&emergency_contact, 5);
+
 	for(;;)
 	{
 		/*wait for distress event*/
@@ -169,7 +168,7 @@ void vTaskDistress()
 		/*take mutex to read emergency contact*/
 		xSemaphoreTake(xMutexEC,portMAX_DELAY);
 		/*send sms distress message*/
-		//sendSMS(&emergency_contact, "HELP");
+		sendSMS(&emergency_contact, "HELP");
 		/*realease mutex*/
 		xSemaphoreGive(xMutexEC);
 	}
@@ -323,12 +322,16 @@ void vTaskProcessBT()
 	char queueData[30];
 	char queueIndex;
 	for(;;){
+		// Delimiter was received
 		xSemaphoreTake(xSemaphoreBluetooth, portMAX_DELAY);
 		queueIndex = 0;
+		// Empty all data in queue
 		while(uxQueueMessagesWaiting(xQueueBT) != 0){
 			xQueueReceive(xQueueBT, &queueData[(queueIndex++)], 0);
 		}
+	// Parse the data
 	parseCommand(queueData);
+	// Execute parsed command
 	executeCommand();
 	}
 }
